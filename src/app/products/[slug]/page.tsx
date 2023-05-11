@@ -8,29 +8,29 @@ interface Props {
   };
 }
 
-export function generateMetadata({ params: { slug } }: Props) {
+export async function generateMetadata({ params: { slug } }: Props) {
+  const product = await getProduct(slug);
   return {
-    title: `제품 이름: ${slug}`,
+    title: `제품 이름: ${product?.name}`,
   };
 }
 
-export default function DetailPage({ params: { slug } }: Props) {
+export default async function DetailPage({ params: { slug } }: Props) {
   //todo: 서버 파일(데이터베이스)에 있는 제품 정보를 읽어와서 보여준다.
-  const product = getProduct(slug);
-
+  const product = await getProduct(slug);
   if (!product) notFound();
 
   return (
     <>
-      <h1>{product} 제품 설명 페이지</h1>
-      <p>{product} 제품 설명</p>
+      <h1>{product.name} 제품 설명 페이지</h1>
+      <p>{product.name} 제품 설명</p>
       <Link href="/products">목록으로 이동</Link>
     </>
   );
 }
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   //todo: 모든 제품의 페이지들을 미리 만들어 둔다.(SSG)
-  const products = getProducts();
-  return products.map((product) => ({ slug: product }));
+  const products = await getProducts();
+  return products.map(({ id }) => ({ slug: id }));
 }
