@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function Counter() {
   const [count, setCount] = useState(0);
+  console.log("hi! - client");
 
   return (
     <>
