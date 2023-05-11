@@ -7,6 +7,12 @@ interface Props {
   };
 }
 
+export function generateMetadata({ params: { slug } }: Props) {
+  return {
+    title: `제품 이름: ${slug}`,
+  };
+}
+
 export default function DetailPage({ params: { slug } }: Props) {
   if (slug === "nothing") notFound();
 

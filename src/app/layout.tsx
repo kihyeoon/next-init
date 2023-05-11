@@ -1,6 +1,15 @@
 import Link from "next/link";
 import styles from "./layout.module.css";
 import "./globals.css";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "멋진 제품 사이트",
+  description: "멋진 제품을 판매하는 사이트입니다.",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -9,11 +18,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
-      <head />
       <body>
         <header className={styles.header}>
           <h1>Demo Note</h1>
