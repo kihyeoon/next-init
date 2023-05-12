@@ -2,6 +2,8 @@ import { getProduct, getProducts } from "@/service/products";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+export const revalidate = 3;
+
 interface Props {
   params: {
     slug: string;
