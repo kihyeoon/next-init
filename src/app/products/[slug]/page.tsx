@@ -1,7 +1,8 @@
+import ToProductsButton from "@/components/ToProductsButton";
 import { getProduct, getProducts } from "@/service/products";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export const revalidate = 3;
 
@@ -21,7 +22,10 @@ export async function generateMetadata({ params: { slug } }: Props) {
 export default async function DetailPage({ params: { slug } }: Props) {
   //todo: 서버 파일(데이터베이스)에 있는 제품 정보를 읽어와서 보여준다.
   const product = await getProduct(slug);
-  if (!product) notFound();
+  if (!product) {
+    // notFound();
+    redirect("/products");
+  }
 
   return (
     <>
@@ -33,7 +37,7 @@ export default async function DetailPage({ params: { slug } }: Props) {
         height="300"
       />
       <p>{product.name} 제품 설명</p>
-      <Link href="/products">목록으로 이동</Link>
+      <ToProductsButton />
     </>
   );
 }
