@@ -3,6 +3,7 @@ import { getProducts } from "@/service/products";
 import Link from "next/link";
 
 export default async function ProductsPage() {
+  throw new Error("Error!");
   const products = await getProducts();
   return (
     <>
