@@ -1,4 +1,5 @@
 import { getProduct, getProducts } from "@/service/products";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -25,6 +26,12 @@ export default async function DetailPage({ params: { slug } }: Props) {
   return (
     <>
       <h1>{product.name} 제품 설명 페이지</h1>
+      <Image
+        src={`/images/${product.image}`}
+        alt={product.name}
+        width="300"
+        height="300"
+      />
       <p>{product.name} 제품 설명</p>
       <Link href="/products">목록으로 이동</Link>
     </>
